@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="30dp"
+    android:background="@android:color/white"
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+    <!-- android:minHeight="120dp"
+     android:minWidth="260dp"-->
+
+    <LinearLayout
+        android:layout_margin="24dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:scrollbars="vertical"
+            android:visibility="visible"
+            android:text="Error Reporter...!"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="20dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:scrollbars="vertical"
+            android:text="Ooooops.. I crashed but don't worry you can send error report to my developer to help him fix the issue."
+            android:textColor="#5f5f5f"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="right|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="CANCEL"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:text="REPORT"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
