@@ -14,6 +14,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AutoErrorReporter.getInstance().inIt(this);
+        AutoErrorReporter.get(this)
+                .setEmailAddresses("devs.ideal@gmail.com")
+                .setEmailSubject("Auto Crash Report")
+                .start();
     }
 }

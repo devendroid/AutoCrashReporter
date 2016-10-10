@@ -39,7 +39,7 @@ public class ErrorReporterActivity extends Activity implements View.OnClickListe
 
         }
         else if (i == R.id.tv_report) {
-            AutoErrorReporter.getInstance().checkErrorAndSendMail(this);
+            AutoErrorReporter.get(getApplication()).checkErrorAndSendMail(this);
             finish();
         }
     }

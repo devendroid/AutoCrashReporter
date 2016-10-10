@@ -1,5 +1,6 @@
 package com.devs.acr;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -7,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -27,10 +29,10 @@ import java.util.Random;
 public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	private static final String TAG = AutoErrorReporter.class.getSimpleName();
-	private final static String[] RECIPIENTS = new String[] {
-			"devendra@idealtechnologys.com",
-			"devs.ideal@gmail.com" };
-	private final static String SUBJECT = "ACR: New Crash Report Generated";
+	private static String DEFAULT_EMAIL_SUBJECT = "ACR: New Crash Report Generated";
+
+	private String[] recipients ;
+	private boolean startAttempted = false;
 
 	private String versionName;
 	//private String buildNumber;
@@ -56,13 +58,70 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	private Thread.UncaughtExceptionHandler previousHandler;
 	private static AutoErrorReporter sInstance;
-	private Context mContext;
+	private Application application;
+
+	private AutoErrorReporter(Application application){
+		this.application = application;
+	}
+
+	public static AutoErrorReporter get(Application application) {
+		if (sInstance == null)
+			sInstance = new AutoErrorReporter(application);
+		return sInstance;
+	}
+
+	public void start() {
+
+		if(startAttempted) {
+			Log.i(TAG, "Already started");
+			return;
+		}
+		previousHandler = Thread.getDefaultUncaughtExceptionHandler();
+		Thread.setDefaultUncaughtExceptionHandler(this);
+
+		startAttempted = true;
+	}
+
+	/**
+	 * (Required) Defines one or more email addresses to send bug reports to. This method MUST be
+	 * called before calling <code>start</code>. This method CANNOT be called after calling
+	 * <code>start</code>.
+	 *
+	 * @param emailAddresses one or more email addresses
+	 * @return the current <code>AutoErrorReporter</code> instance (to allow for method chaining)
+	 */
+
+	public AutoErrorReporter setEmailAddresses(@NonNull final String... emailAddresses) {
+		if (startAttempted) {
+			throw new IllegalStateException(
+					"EmailAddresses must be set before start");
+		}
+		this.recipients = emailAddresses;
+		return this;
+	}
+
+	/**
+	 * (Optional) Defines a custom subject line to use for all bug reports. By default, reports will
+	 * use the string defined in <code>DEFAULT_EMAIL_SUBJECT/code>. This method CANNOT be called
+	 * after calling <code>start</code>.
+	 *
+	 * @param emailSubject custom email subject line
+	 * @return the current <code>AutoErrorReporter</code> instance (to allow for method chaining)
+	 */
+	public AutoErrorReporter setEmailSubject(@NonNull final String emailSubject) {
+		if (startAttempted) {
+			throw new IllegalStateException("EmailSubject must be set before start");
+		}
+
+		this.DEFAULT_EMAIL_SUBJECT = emailSubject;
+		return this;
+	}
 
 	public void addCustomData(String Key, String Value) {
 		customParameters.put(Key, Value);
 	}
 
-	private String CreateCustomInfoString() {
+	private String createCustomInfoString() {
 		String CustomInfo = "";
 		Iterator iterator = customParameters.keySet().iterator();
 		while (iterator.hasNext()) {
@@ -71,18 +130,6 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 			CustomInfo += CurrentKey + " = " + CurrentVal + "\n";
 		}
 		return CustomInfo;
-	}
-
-	public static AutoErrorReporter getInstance() {
-		if (sInstance == null)
-			sInstance = new AutoErrorReporter();
-		return sInstance;
-	}
-
-	public void inIt(Context context) {
-		previousHandler = Thread.getDefaultUncaughtExceptionHandler();
-		Thread.setDefaultUncaughtExceptionHandler(this);
-		mContext = context;
 	}
 
 	public long getAvailableInternalMemorySize() {
@@ -138,7 +185,7 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 	}
 
 	private String createInformationString() {
-		recordInformations(mContext);
+		recordInformations(application);
 
 		String ReturnVal = "";
 		ReturnVal += "Version : " + versionName;
@@ -207,7 +254,7 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 		Report += "Custom Informations :\n";
 		Report += "=====================\n";
-		Report += CreateCustomInfoString();
+		Report += createCustomInfoString();
 
 		Report += "\n\n";
 		Report += "Stack : \n";
@@ -236,9 +283,9 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 		saveAsFile(Report);
 		//SendErrorMail(CurContext, Report );
 
-		Intent intent = new Intent(mContext, ErrorReporterActivity.class);
+		Intent intent = new Intent(application, ErrorReporterActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		mContext.startActivity(intent);
+		application.startActivity(intent);
 
 		previousHandler.uncaughtException(t, e);
 	}
@@ -246,9 +293,9 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 	private void sendErrorMail(Context _context, String ErrorContent) {
 		Log.i(TAG, "====sendErrorMail");
 		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		String subject = SUBJECT;
+		String subject = DEFAULT_EMAIL_SUBJECT;
 		String body = "\n\n" + ErrorContent + "\n\n";
-		sendIntent.putExtra(Intent.EXTRA_EMAIL, RECIPIENTS);
+		sendIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
 		sendIntent.putExtra(Intent.EXTRA_TEXT, body);
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
 		sendIntent.setType("message/rfc822");
@@ -262,7 +309,7 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 			Random generator = new Random();
 			int random = generator.nextInt(99999);
 			String FileName = "stack-" + random + ".stacktrace";
-			FileOutputStream trace = mContext.openFileOutput(FileName,
+			FileOutputStream trace = application.openFileOutput(FileName,
 					Context.MODE_PRIVATE);
 			trace.write(ErrorContent.getBytes());
 			trace.close();
