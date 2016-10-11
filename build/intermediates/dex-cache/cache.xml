@@ -2,76 +2,67 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_6f5000335d1df4742c3d52f0a16d962449cf53af/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_d66ea7b2e07c31888b2add96dfbe9dfa29f00e97/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="55ebbdb59edc75f43c2932cc9c30418fb677a32b">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_8a8b0218a13631a9ea37eae9ea028c1bc0d41a1a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_a95b98efc59137cc0171e1acc1e3e12083185498/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_855ef9b3456f064c29094d50bc571f6c70a482f8/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/android-sdk-as/SDK/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_1ee049525797a42195237ec0cbdbfb90882c8e55/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.3"
-        sha1="fe73a99cc94c5c59c7d472297cdc5e6e50dd6e25">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a4942c484de03ab07bf91241f949e91af8bcca2e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
+        is-multidex="false"
         jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
-        jumboMode="true"
+        jumboMode="false"
         optimize="true"
         revision="23.0.3"
         sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_a3b5e626fc1996523712455394e90f6979bf0026/classes.dex" />
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_a3b5e626fc1996523712455394e90f6979bf0026.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_d66ea7b2e07c31888b2add96dfbe9dfa29f00e97.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_6f5000335d1df4742c3d52f0a16d962449cf53af.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.devs/acr/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="7feefe4c8c884c7802edadf9ce9ac160ae7922c2">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/com.devs-acr-1.0.0_f70135a4a892dcf3b990f21ee3daf90e0fe517bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/android-sdk-as/SDK/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_1ee049525797a42195237ec0cbdbfb90882c8e55.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_a95b98efc59137cc0171e1acc1e3e12083185498.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/idealtechno/AndroidStudioProjects/AutoCrashReporter/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_855ef9b3456f064c29094d50bc571f6c70a482f8.jar" />
     </item>
 
 </items>

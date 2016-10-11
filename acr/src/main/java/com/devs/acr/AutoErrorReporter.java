@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -84,14 +83,14 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	/**
 	 * (Required) Defines one or more email addresses to send bug reports to. This method MUST be
-	 * called before calling <code>start</code>. This method CANNOT be called after calling
-	 * <code>start</code>.
+	 * called before calling start This method CANNOT be called after calling
+	 * start.
 	 *
 	 * @param emailAddresses one or more email addresses
-	 * @return the current <code>AutoErrorReporter</code> instance (to allow for method chaining)
+	 * @return the current AutoErrorReporterinstance (to allow for method chaining)
 	 */
 
-	public AutoErrorReporter setEmailAddresses(@NonNull final String... emailAddresses) {
+	public AutoErrorReporter setEmailAddresses(final String... emailAddresses) {
 		if (startAttempted) {
 			throw new IllegalStateException(
 					"EmailAddresses must be set before start");
@@ -102,13 +101,12 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	/**
 	 * (Optional) Defines a custom subject line to use for all bug reports. By default, reports will
-	 * use the string defined in <code>DEFAULT_EMAIL_SUBJECT/code>. This method CANNOT be called
-	 * after calling <code>start</code>.
-	 *
+	 * use the string defined in DEFAULT_EMAIL_SUBJECT This method CANNOT be called
+	 * after calling start.
 	 * @param emailSubject custom email subject line
-	 * @return the current <code>AutoErrorReporter</code> instance (to allow for method chaining)
+	 * @return the current AutoErrorReporter instance (to allow for method chaining)
 	 */
-	public AutoErrorReporter setEmailSubject(@NonNull final String emailSubject) {
+	public AutoErrorReporter setEmailSubject(final String emailSubject) {
 		if (startAttempted) {
 			throw new IllegalStateException("EmailSubject must be set before start");
 		}
