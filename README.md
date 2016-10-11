@@ -6,9 +6,10 @@ ACR is an android library to simplify crash detection while your app is under de
 ![ACR Demo](/assets/acr_demo.gif)
 
 ##Dependency
+```
 - Add the dependencies to your app level build.gradle file:
 
-###Gradle
+####Gradle
 ```gradle
 repositories {
    maven {
@@ -20,7 +21,7 @@ dependencies {
     compile 'com.devs:acr:1.0.0'
 }
 ```
-###Maven
+####Maven
 ```xml
 <dependency>
 <groupId>com.devs</groupId>
@@ -28,6 +29,7 @@ dependencies {
 <version>1.0.0</version>
 <type>pom</type>
 </dependency>
+```
 ```
 ##Usage
 - Inside your Application:
