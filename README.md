@@ -3,7 +3,7 @@
 ACR is an android library to simplify crash detection while your app is under development, app user can easily send the crash report to developer that will help him to fix the issue.
 
 ##Demonstration
-![ACR Demo](/assets/acr-demo.gif)
+![ACR Demo](/assets/acr_demo.gif)
 
 ##Dependency
 - Add the dependencies to your app level build.gradle file:
@@ -20,16 +20,16 @@ dependencies {
 ```
 
 ##Usage
-- Inside your Application.
+- Inside your Application:
 ```java
 @Override
-    public void onCreate() {
-        super.onCreate();
-        AutoErrorReporter.get(this)
-                .setEmailAddresses("yourdeveloper@gmail.com")
-                .setEmailSubject("Auto Crash Report")
-                .start();
-    }
+public void onCreate() {
+     super.onCreate();
+     AutoErrorReporter.get(this)
+          .setEmailAddresses("yourdeveloper@gmail.com")
+          .setEmailSubject("Auto Crash Report")
+          .start();
+}
 
 ```
 
