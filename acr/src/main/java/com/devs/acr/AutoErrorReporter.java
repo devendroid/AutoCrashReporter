@@ -23,8 +23,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-//http://www.iriphon.com/2011/06/23/how-do-i-get-android-crash-logs/
-
+/**
+ * @author Deven
+ *
+ *         Licensed under the Apache License 2.0 license see:
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ */
 public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	private static final String TAG = AutoErrorReporter.class.getSimpleName();

@@ -8,7 +8,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-
+/**
+ * @author Deven
+ *
+ *         Licensed under the Apache License 2.0 license see:
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ */
 public class ErrorReporterActivity extends Activity implements View.OnClickListener{
 
     @Override

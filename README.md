@@ -12,7 +12,7 @@ ACR is an android library to simplify crash detection while your app is under de
 ```gradle
 repositories {
    maven {
-       url  "http://dl.bintray.com/ideal/maven"
+       url  "https://ideal.bintray.com/maven"
    }
 }
 
