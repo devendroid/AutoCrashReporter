@@ -2,6 +2,7 @@ package com.devs.acr;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,9 @@ public class ErrorReporterActivity extends Activity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_erroe_reporter);
 
-        this.setFinishOnTouchOutside(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            this.setFinishOnTouchOutside(false);
+        }
         Window window = getWindow();
         window.setBackgroundDrawable(new ColorDrawable(0));
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.text.Html;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -32,6 +33,7 @@ import java.util.Random;
 public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	private static final String TAG = AutoErrorReporter.class.getSimpleName();
+	private static final boolean DEBUGABLE = false;
 	private static String DEFAULT_EMAIL_SUBJECT = "ACR: New Crash Report Generated";
 
 	private String[] recipients ;
@@ -74,9 +76,8 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 	}
 
 	public void start() {
-
 		if(startAttempted) {
-			Log.i(TAG, "Already started");
+			showLog("Already started");
 			return;
 		}
 		previousHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -115,7 +116,7 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 			throw new IllegalStateException("EmailSubject must be set before start");
 		}
 
-		this.DEFAULT_EMAIL_SUBJECT = emailSubject;
+		DEFAULT_EMAIL_SUBJECT = emailSubject;
 		return this;
 	}
 
@@ -124,30 +125,28 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 	}
 
 	private String createCustomInfoString() {
-		String CustomInfo = "";
-		Iterator iterator = customParameters.keySet().iterator();
-		while (iterator.hasNext()) {
-			String CurrentKey = (String) iterator.next();
-			String CurrentVal = customParameters.get(CurrentKey);
-			CustomInfo += CurrentKey + " = " + CurrentVal + "\n";
+		String customInfo = "";
+		for (Object currentKey : customParameters.keySet()) {
+			String currentVal = customParameters.get(currentKey);
+			customInfo += currentKey + " = " + currentVal + "\n";
 		}
-		return CustomInfo;
+		return customInfo;
 	}
 
-	public long getAvailableInternalMemorySize() {
+	private long getAvailableInternalMemorySize() {
 		File path = Environment.getDataDirectory();
 		StatFs stat = new StatFs(path.getPath());
 		long blockSize = stat.getBlockSize();
 		long availableBlocks = stat.getAvailableBlocks();
-		return availableBlocks * blockSize;
+		return (availableBlocks * blockSize)/(1024*1024);
 	}
 
-	public long getTotalInternalMemorySize() {
+	private long getTotalInternalMemorySize() {
 		File path = Environment.getDataDirectory();
 		StatFs stat = new StatFs(path.getPath());
 		long blockSize = stat.getBlockSize();
 		long totalBlocks = stat.getBlockCount();
-		return totalBlocks * blockSize;
+		return (totalBlocks * blockSize)/(1024*1024);
 	}
 
 	private void recordInformations(Context context) {
@@ -188,132 +187,100 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 
 	private String createInformationString() {
 		recordInformations(application);
+		StringBuilder infoStringBuffer = new StringBuilder();
+		infoStringBuffer.append("\nVERSION		: ").append(versionName);
+		infoStringBuffer.append("\nPACKAGE      : ").append(packageName);
+		infoStringBuffer.append("\nFILE-PATH    : ").append(filePath);
+		infoStringBuffer.append("\nPHONE-MODEL  : ").append(phoneModel);
+		infoStringBuffer.append("\nANDROID_VERS : ").append(androidVersion);
+		infoStringBuffer.append("\nBOARD        : ").append(board);
+		infoStringBuffer.append("\nBRAND        : ").append(brand);
+		infoStringBuffer.append("\nDEVICE       : ").append(device);
+		infoStringBuffer.append("\nDISPLAY      : ").append(display);
+		infoStringBuffer.append("\nFINGER-PRINT : ").append(fingerPrint);
+		infoStringBuffer.append("\nHOST         : ").append(host);
+		infoStringBuffer.append("\nID           : ").append(id);
+		infoStringBuffer.append("\nMODEL        : ").append(model);
+		infoStringBuffer.append("\nPRODUCT      : ").append(product);
+		infoStringBuffer.append("\nMANUFACTURER : ").append(manufacturer);
+		infoStringBuffer.append("\nTAGS         : ").append(tags);
+		infoStringBuffer.append("\nTIME         : ").append(time);
+		infoStringBuffer.append("\nTYPE         : ").append(type);
+		infoStringBuffer.append("\nUSER         : ").append(user);
+		infoStringBuffer.append("\nTOTAL-INTERNAL-MEMORY     : ").append(getTotalInternalMemorySize()+" mb");
+		infoStringBuffer.append("\nAVAILABLE-INTERNAL-MEMORY : ").append(getAvailableInternalMemorySize()+" mb");
 
-		String ReturnVal = "";
-		ReturnVal += "Version : " + versionName;
-		ReturnVal += "\n";
-		//ReturnVal += "Build Number : " + buildNumber;
-		ReturnVal += "\n";
-		ReturnVal += "Package : " + packageName;
-		ReturnVal += "\n";
-		ReturnVal += "FilePath : " + filePath;
-		ReturnVal += "\n";
-		ReturnVal += "Phone Model" + phoneModel;
-		ReturnVal += "\n";
-		ReturnVal += "Android Version : " + androidVersion;
-		ReturnVal += "\n";
-		ReturnVal += "Board : " + board;
-		ReturnVal += "\n";
-		ReturnVal += "Brand : " + brand;
-		ReturnVal += "\n";
-		ReturnVal += "Device : " + device;
-		ReturnVal += "\n";
-		ReturnVal += "Display : " + display;
-		ReturnVal += "\n";
-		ReturnVal += "Finger Print : " + fingerPrint;
-		ReturnVal += "\n";
-		ReturnVal += "Host : " + host;
-		ReturnVal += "\n";
-		ReturnVal += "ID : " + id;
-		ReturnVal += "\n";
-		ReturnVal += "Model : " + model;
-		ReturnVal += "\n";
-		ReturnVal += "Product : " + product;
-		ReturnVal += "\n";
-		ReturnVal += "Manufacturer : " + manufacturer;
-		ReturnVal += "\n";
-		ReturnVal += "Tags : " + tags;
-		ReturnVal += "\n";
-		ReturnVal += "Time : " + time;
-		ReturnVal += "\n";
-		ReturnVal += "Type : " + type;
-		ReturnVal += "\n";
-		ReturnVal += "User : " + user;
-		ReturnVal += "\n";
-		ReturnVal += "Total Internal memory : " + getTotalInternalMemorySize();
-		ReturnVal += "\n";
-		ReturnVal += "Available Internal memory : "
-				+ getAvailableInternalMemorySize();
-		ReturnVal += "\n";
-
-		return ReturnVal;
+		return infoStringBuffer.toString();
 	}
 
 	public void uncaughtException(Thread t, Throwable e) {
-		Log.i(TAG, "====uncaughtException");
+		showLog("====uncaughtException");
 
-		String Report = "";
-		Date CurDate = new Date();
-		Report += "Error Report collected on : " + CurDate.toString();
-		Report += "\n";
-		Report += "\n";
-		Report += "Informations :";
-		Report += "\n";
-		Report += "==============";
-		Report += "\n";
-		Report += "\n";
-		Report += createInformationString();
+		StringBuilder reportStringBuffer = new StringBuilder();
+		reportStringBuffer.append("Error Report collected on : ").append(new Date().toString());
+		reportStringBuffer.append("\n\nInformations :\n==============");
+		reportStringBuffer.append(createInformationString());
+		String customInfo = createCustomInfoString();
+		if(!customInfo.equals("")) {
+			reportStringBuffer.append("\n\nCustom Informations :\n==============\n");
+			reportStringBuffer.append(customInfo);
+		}
 
-		Report += "Custom Informations :\n";
-		Report += "=====================\n";
-		Report += createCustomInfoString();
-
-		Report += "\n\n";
-		Report += "Stack : \n";
-		Report += "======= \n";
+		reportStringBuffer.append("\n\nStack :\n==============\n");
 		final Writer result = new StringWriter();
 		final PrintWriter printWriter = new PrintWriter(result);
 		e.printStackTrace(printWriter);
-		String stacktrace = result.toString();
-		Report += stacktrace;
+		reportStringBuffer.append(result.toString());
 
-		Report += "\n";
-		Report += "Cause : \n";
-		Report += "======= \n";
-
-		// If the exception was thrown in a background thread inside
+		reportStringBuffer.append("\nCause :\n==============");
+        // If the exception was thrown in a background thread inside
 		// AsyncTask, then the actual exception can be found with getCause
 		Throwable cause = e.getCause();
 		while (cause != null) {
 			cause.printStackTrace(printWriter);
-			Report += result.toString();
+			reportStringBuffer.append(result.toString());
 			cause = cause.getCause();
 		}
 		printWriter.close();
-		Report += "**** End of current Report ***";
-		Log.i(TAG, "====uncaughtException \n Report: "+Report);
-		saveAsFile(Report);
-		//SendErrorMail(CurContext, Report );
+		reportStringBuffer.append("\n\n**** End of current Report ***");
+		showLog("====uncaughtException \n Report: "+reportStringBuffer.toString());
+		saveAsFile(reportStringBuffer.toString());
 
 		Intent intent = new Intent(application, ErrorReporterActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		application.startActivity(intent);
 
-		previousHandler.uncaughtException(t, e);
+		//previousHandler.uncaughtException(t, e);
+
+		android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(10);
 	}
 
-	private void sendErrorMail(Context _context, String ErrorContent) {
-		Log.i(TAG, "====sendErrorMail");
+
+
+	private void sendErrorMail(Context _context, String errorContent) {
+		showLog("====sendErrorMail");
 		Intent sendIntent = new Intent(Intent.ACTION_SEND);
 		String subject = DEFAULT_EMAIL_SUBJECT;
-		String body = "\n\n" + ErrorContent + "\n\n";
+		String body = "\n\n" + errorContent + "\n\n";
 		sendIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
 		sendIntent.putExtra(Intent.EXTRA_TEXT, body);
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
 		sendIntent.setType("message/rfc822");
+		//sendIntent.setType("text/html");
 		sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		_context.startActivity(Intent.createChooser(sendIntent, "Title:"));
 	}
 
-	private void saveAsFile(String ErrorContent) {
-		Log.i(TAG, "====SaveAsFile");
+	private void saveAsFile(String errorContent) {
+		showLog("====SaveAsFile");
 		try {
 			Random generator = new Random();
 			int random = generator.nextInt(99999);
 			String FileName = "stack-" + random + ".stacktrace";
 			FileOutputStream trace = application.openFileOutput(FileName,
 					Context.MODE_PRIVATE);
-			trace.write(ErrorContent.getBytes());
+			trace.write(errorContent.getBytes());
 			trace.close();
 		} catch (Exception e) {
 			// ...
@@ -337,25 +304,24 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 		return getErrorFileList().length > 0;
 	}
 
-	public void checkErrorAndSendMail(Context _context) {
+	void checkErrorAndSendMail(Context _context) {
 		try {
 			filePath = _context.getFilesDir().getAbsolutePath();
 			if (bIsThereAnyErrorFile()) {
-				String WholeErrorText = "";
+				StringBuilder wholeErrorTextSB = new StringBuilder();
 
-				String[] ErrorFileList = getErrorFileList();
+				String[] errorFileList = getErrorFileList();
 				int curIndex = 0;
-				final int MaxSendMail = 5;
-				for (String curString : ErrorFileList) {
-					if (curIndex++ <= MaxSendMail) {
-						WholeErrorText += "New Trace collected :\n";
-						WholeErrorText += "=====================\n ";
+				final int maxSendMail = 5;
+				for (String curString : errorFileList) {
+					if (curIndex++ <= maxSendMail) {
+						wholeErrorTextSB.append("New Trace collected :\n=====================\n");
 						String filePathStr = filePath + "/" + curString;
 						BufferedReader input = new BufferedReader(
 								new FileReader(filePathStr));
 						String line;
 						while ((line = input.readLine()) != null) {
-							WholeErrorText += line + "\n";
+							wholeErrorTextSB.append(line + "\n");
 						}
 						input.close();
 					}
@@ -364,22 +330,15 @@ public class AutoErrorReporter implements Thread.UncaughtExceptionHandler {
 					File curFile = new File(filePath + "/" + curString);
 					curFile.delete();
 				}
-				sendErrorMail(_context, WholeErrorText);
+				sendErrorMail(_context, wholeErrorTextSB.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-//	public static String currentVersionNumber(Context a) {
-//		PackageManager pm = a.getPackageManager();
-//		try {
-//			PackageInfo pi = pm.getPackageInfo("de.gamedisk.app",
-//					PackageManager.GET_SIGNATURES);
-//			return pi.versionName
-//					+ (pi.versionCode > 0 ? " (" + pi.versionCode + ")" : "");
-//		} catch (NameNotFoundException e) {
-//			return null;
-//		}
-//	}
+	private void showLog(String msg){
+		if(DEBUGABLE) Log.i(TAG, msg);
+	}
+
 }

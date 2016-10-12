@@ -29,7 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(":acr")
-   // compile 'com.devs:acr:1.0.0'
-
-   // compile 'cat.ereza:customactivityoncrash:1.5.0'
+    //compile 'com.devs:acr:1.0.0'
 }

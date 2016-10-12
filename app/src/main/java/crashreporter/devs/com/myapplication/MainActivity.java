@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.devs.acr.AutoErrorReporter;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

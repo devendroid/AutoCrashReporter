@@ -19,15 +19,17 @@
         android:orientation="vertical">
 
         <TextView
+            android:drawableLeft="@drawable/ic_warning_black_48dp"
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:scrollbars="vertical"
             android:visibility="visible"
-            android:text="Error Reporter...!"
-            android:textStyle="bold"
+            android:maxLines="1"
+            android:text=" New Crash Detected"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:layout_marginBottom="20dp"
             android:textSize="18sp" />
 
@@ -37,9 +39,9 @@
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
             android:scrollbars="vertical"
-            android:text="Ooooops.. I crashed but don't worry you can send error report to my developer to help him fix the issue."
+            android:text="Ooooops.. I crashed, but don't worry you can send error report to my developer to help him fix the issue."
             android:textColor="#5f5f5f"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -60,8 +62,8 @@
             android:layout_marginRight="5dp"
             android:gravity="center"
             android:text="CANCEL"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp" />
+            android:textColor="#cc0207"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_report"
@@ -71,8 +73,8 @@
             android:layout_gravity="right|bottom"
             android:gravity="center"
             android:text="REPORT"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp" />
+            android:textColor="#cc0207"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
