@@ -1,4 +1,7 @@
 # AutoCrashReporter
+[![ACR](https://api.bintray.com/packages/ideal/maven/acr/images/download.svg) ](https://bintray.com/ideal/maven/acr/_latestVersion)
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AutoCrashReporter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4517)
 [![GitHub license](https://img.shields.io/github/license/dcendents/android-maven-gradle-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ACR is an android library to simplify crash detection while your app is under development, crash will be automatically detect by the library then app tester/user can easily send the crash report on one click to developer that will help him to fix the issue.
