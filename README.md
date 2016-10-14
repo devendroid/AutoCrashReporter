@@ -11,14 +11,14 @@ ACR is an android library to simplify crash detection while your app is under de
 
 ####Gradle
 ```gradle
-    compile 'com.devs:acr:1.0.0'
+    compile 'com.devs:acr:1.0.1'
 ```
 ####Maven
 ```xml
 <dependency>
 <groupId>com.devs</groupId>
 <artifactId>acr</artifactId>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <type>pom</type>
 </dependency>
 ```
