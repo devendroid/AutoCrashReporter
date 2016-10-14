@@ -19,7 +19,6 @@ android {
     }
 }
 
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -29,5 +28,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(":acr")
-    //compile 'com.devs:acr:1.0.0'
+    // compile 'com.devs:acr:1.0.1'
 }

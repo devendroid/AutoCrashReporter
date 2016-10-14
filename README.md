@@ -1,5 +1,7 @@
 # AutoCrashReporter
 
+[![GitHub license](https://img.shields.io/github/license/dcendents/android-maven-gradle-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
 ACR is an android library to simplify crash detection while your app is under development, app tester/user can easily send the crash report to developer that will help him to fix the issue.
 
 ##Demonstration
