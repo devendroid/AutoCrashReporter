@@ -11,7 +11,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         AutoErrorReporter.get(this)
-                .setEmailAddresses("devs.ideal@gmail.com")
+                .setEmailAddresses("developer@gmail.com")
                 .setEmailSubject("Auto Crash Report")
                 .start();
     }
